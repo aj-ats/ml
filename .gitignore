@@ -3,6 +3,83 @@
 __pycache__/*
 
 # data dir
+**/data/*
+**/cats_and_dogs/*
+
+# ==============================================================================
+# JUPYTER NOTEBOOKS & LAB
+# ==============================================================================
+# Ignore checkpoint directories created by Jupyter
+**/.ipynb_checkpoints/
+
+# Ignore Jupyter Lab workspace settings and state
+.ipynb_checkpoints
+.ipython/
+.jupyter/
+.local/
+~*.ipynb
+
+# ==============================================================================
+# MACHINE LEARNING / DATA SCIENCE SPECIFIC
+# ==============================================================================
+# Raw and processed datasets (Never commit large data to Git)
 data/
-**/cats_and_dogs/
+datasets/
+*.csv
+*.tsv
+*.json
+*.parquet
+*.feather
+*.hdf5
+*.pkl
+*.pickle
+
+# Saved model weights, checkpoints, and architectures
+models/
+saved_models/
+checkpoints/
+*.h5
+*.pth
+*.pt
+*.onnx
+*.pb
+*.tflite
+*.ckpt
+
+# TensorBoard, MLflow, and training logs
+logs/
+lightning_logs/
+mlruns/
+.mlflow/
+wandb/
+
+# ==============================================================================
+# PYTHON ENVIRONMENT & CACHE
+# ==============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments (Always install dependencies via requirements.txt/poetry)
+.venv/
+venv/
+env/
+ENV/
+.env_ml/
+
+# Pipenv, Poetry, and Conda files
+.pytest_cache/
+.tox/
+.coverage
+.cache/
+
+# ==============================================================================
+# ENVIRONMENT VARIABLES & CREDENTIALS
+# ==============================================================================
+# Never commit passwords, API keys, or cloud credentials
+.env
+.env.*
+secrets.json
+*.pem
 
