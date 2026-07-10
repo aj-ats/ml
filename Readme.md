@@ -3,7 +3,7 @@ source code for my solutions for https://www.freecodecamp.org/learn/machine-lear
 
 # req
 python3
-(jupyter-lab)[https://jupyterlab.readthedocs.io/en/latest/getting_started/starting.html]
+(jupyter-lab)![https://jupyterlab.readthedocs.io/en/latest/getting_started/starting.html]
 # set up
 ## Linux/WSL2 ubuntu 
 ```
