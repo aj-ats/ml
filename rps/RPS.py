@@ -15,7 +15,14 @@ def _new_state():
         },
         "last_predictions": {},
         "my_pair": {a + b: 0 for a in MOVES for b in MOVES},
-        "opp_four": {a + b + c + d: 0 for a in MOVES for b in MOVES for c in MOVES for d in MOVES},
+        "opp_four": {
+            a + b + c + d: 0
+            for a in MOVES
+            for b in MOVES
+            for c in MOVES
+            for d in MOVES
+        },
+        "quincy_phase_hits": [0, 0, 0, 0, 0],
     }
 
 
@@ -54,8 +61,12 @@ def player(prev_play, state={"data": _new_state()}):
     predictions = {}
 
     quincy_cycle = ["R", "R", "P", "P", "S"]
-    next_round = len(data["opp"]) + 1
-    predictions["quincy"] = quincy_cycle[next_round % 5]
+    round_idx = len(data["opp"]) - 1
+    for offset in range(5):
+        if quincy_cycle[(round_idx + offset) % 5] == prev_play:
+            data["quincy_phase_hits"][offset] += 1
+    best_offset = max(range(5), key=lambda i: data["quincy_phase_hits"][i])
+    predictions["quincy"] = quincy_cycle[(len(data["opp"]) + best_offset) % 5]
 
     if data["me"]:
         predictions["kris"] = BEAT[data["me"][-1]]
@@ -80,12 +91,11 @@ def player(prev_play, state={"data": _new_state()}):
     else:
         predictions["ngram3"] = predictions["quincy"]
 
-    vote = {m: 0 for m in MOVES}
-    for name, predicted_opp_play in predictions.items():
-        weight = max(1, data["scores"][name] + 1)
-        vote[predicted_opp_play] += weight
-
-    predicted_opp = max(MOVES, key=lambda m: vote[m])
+    priority = {"abbey": 5, "kris": 4, "mrugesh": 3, "quincy": 2, "ngram3": 1}
+    best_model = max(
+        predictions.keys(), key=lambda name: (data["scores"][name], priority[name])
+    )
+    predicted_opp = predictions[best_model]
     guess = BEAT[predicted_opp]
 
     data["last_predictions"] = predictions

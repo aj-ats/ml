@@ -4,7 +4,7 @@ __pycache__/*
 
 # data dir
 **/data/*
-**/cats_and_dogs/*
+cats_and_dogs/
 
 # ==============================================================================
 # JUPYTER NOTEBOOKS & LAB
